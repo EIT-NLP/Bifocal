@@ -67,15 +67,6 @@
 
 > [TODO] Evaluation commands will be added with the code release.
 
-Bifocal is evaluated with [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval) on the following benchmarks:
-
-| Category | Benchmarks |
-| --- | --- |
-| General | VQAv2, GQA, MMBench, OK-VQA |
-| Reasoning | ScienceQA-IMG, AI2D |
-| OCR | TextVQA, OCRBench, DocVQA, ChartQA |
-| Hallucination | POPE |
-| Grounding | RefCOCO, RefCOCO+, RefCOCOg (Acc@0.5) |
 
 ## ✨ Results <a id="results"></a>
 
@@ -86,9 +77,9 @@ Performance relative to the unpruned model on general (Gen.) and grounding (REC)
 | LLaVA-1.5-7B | 192 tokens | 98.1% | **98.5%** | 103.6% | **111.0%** |
 | LLaVA-1.5-7B | 128 tokens | 95.2% | **96.3%** | 91.1% | **101.8%** |
 | LLaVA-1.5-7B | 64 tokens | 90.0% | **90.6%** | 54.9% | **66.7%** |
-| LLaVA-NeXT-7B | ≈640 tokens | 93.7% | **99.1%** | 72.8% | **90.7%** |
-| LLaVA-NeXT-7B | ≈320 tokens | 86.4% | **92.6%** | 36.8% | **74.0%** |
-| LLaVA-NeXT-7B | ≈160 tokens | 78.2% | **79.8%** | 19.0% | **52.1%** |
+| LLaVA-NeXT-7B | 640 tokens | 93.7% | **99.1%** | 72.8% | **90.7%** |
+| LLaVA-NeXT-7B | 320 tokens | 86.4% | **92.6%** | 36.8% | **74.0%** |
+| LLaVA-NeXT-7B | 160 tokens | 78.2% | **79.8%** | 19.0% | **52.1%** |
 | Qwen2.5-VL-7B | 50% tokens | 97.6% | **98.4%** | 97.2% | **98.3%** |
 | Qwen2.5-VL-7B | 25% tokens | 93.4% | **94.9%** | 85.4% | **90.2%** |
 | Qwen2.5-VL-7B | 15% tokens | 86.7% | **89.0%** | 58.0% | **67.9%** |
