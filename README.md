@@ -31,7 +31,7 @@
 
 ## 🔥 News <a id="news"></a>
 
-- [TODO] The code is being prepared and will be released soon.
+- **[2026.10]** The code is now released!
 - **[2026.10]** The preprint is now available on [arXiv](https://arxiv.org/abs/2610.18399)!
 
 ## 📚 Contents <a id="contents"></a>
@@ -60,13 +60,80 @@
 
 ## 🔧 Preparation <a id="preparation"></a>
 
-> [TODO] Installation and data preparation instructions will be added with the code release.
+1. **Clone the repository.**
 
+```bash
+git clone https://github.com/EIT-NLP/Bifocal.git
+cd Bifocal
+```
+
+2. **Create the environment and install dependencies.**
+
+```bash
+conda create -n bifocal python=3.10 -y
+conda activate bifocal
+pip install -r requirements.txt
+
+git clone https://github.com/haotian-liu/LLaVA.git
+pip install -e LLaVA --no-deps
+
+git clone -b v0.3.4 https://github.com/EvolvingLMMs-Lab/lmms-eval.git
+pip install -e lmms-eval
+
+pip install -e .
+```
+
+3. **Install the decoder patch.**
+
+```bash
+bash install.sh          # symlink patches/modeling_llama.py into transformers
+bash install.sh check    # verify the patch is active
+bash install.sh restore  # restore the original file
+```
+
+4. **Download the model.** Download [llava-v1.5-7b](https://huggingface.co/liuhaotian/llava-v1.5-7b) and set its path:
+
+```bash
+export MODEL_PATH=/path/to/llava-v1.5-7b
+```
 
 ## 🎯 Usage <a id="usage"></a>
 
-> [TODO] Evaluation commands will be added with the code release.
+### 1. Smoke test
 
+```bash
+bash scripts/smoke.sh
+```
+
+This checks the patch and runs 8 RefCOCO testA samples with the unpruned model (576) and with Bifocal at 128 tokens.
+
+### 2. Evaluation
+
+```bash
+bash scripts/eval.sh <budget> [group] [limit]
+```
+
+- `budget`: the average number of visual tokens per LLM layer. The paper uses `192`, `128` and `64`. `576` runs the unpruned LLaVA-1.5 baseline.
+- `group`: `general` (default), `grounding`, `all`, or a comma-separated list of lmms-eval task names.
+- `limit`: optional number of samples per task for a quick trial.
+
+```bash
+bash scripts/eval.sh 128 general
+bash scripts/eval.sh 128 grounding
+bash scripts/eval.sh 576 all
+NPROC=4 bash scripts/eval.sh 64 gqa,pope
+```
+
+| Group | Tasks |
+| --- | --- |
+| `general` | VQAv2 test-dev, GQA, MMBench, OK-VQA, ScienceQA-IMG, AI2D, TextVQA, OCRBench, DocVQA, ChartQA, POPE |
+| `grounding` | RefCOCO val/testA/testB, RefCOCO+ val/testA/testB, RefCOCOg val/test |
+
+VQAv2 test-dev requires submission. Convert the lmms-eval output and upload `vqav2_testdev_evalai.json` to the Test-Dev phase of [EvalAI challenge 830](https://eval.ai/web/challenges/challenge-page/830):
+
+```bash
+python scripts/vqav2_submit.py results/budget128
+```
 
 ## ✨ Results <a id="results"></a>
 

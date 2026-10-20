@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bifocal"
+version = "1.0.0"
+description = "Bifocal: training-free mixed-granularity visual token pruning for multimodal LLMs"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["bifocal*"]
+
+[tool.setuptools.package-data]
+"bifocal.tasks" = ["**/*.yaml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
